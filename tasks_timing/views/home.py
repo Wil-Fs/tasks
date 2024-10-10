@@ -4,7 +4,6 @@ from ..models import Task
 
 def home(request):
     if request.user.is_authenticated:
-        text = 'Good luck my besto friendo'
-        return render(request, 'tasks_timing/home.html', {'text': text})
+        return redirect('tasks-list')
     else:
         return redirect('login')

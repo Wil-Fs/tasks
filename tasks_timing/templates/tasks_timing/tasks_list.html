@@ -34,6 +34,12 @@
                         <a href="{% url 'start-task' task.id %}">
                             Iniciar tarefa
                         </a>
+                        <a href="{% url 'update-task' task.id %}">
+                            update-task
+                        </a>
+                        <a href="{% url 'delete-task' task.id %}">
+                            delete-task
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

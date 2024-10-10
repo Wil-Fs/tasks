@@ -33,7 +33,7 @@ def add_task(request):
 
 def start_task(request, pk):
     if request.user.is_authenticated:
-        task = Task.objects.get(id=pk)
+        task = get_object_or_404(Task, id=pk)
         time_working = TimeWorking.objects.create(
             task=task,
             time_in=True
@@ -41,5 +41,41 @@ def start_task(request, pk):
 
         messages.warning(request, f'A terefa "{task}" foi iniciada!')
         return redirect('tasks-list')
+    else:
+        return redirect('login')
+
+def update_task(request, pk):
+    if request.user.is_authenticated:
+        task = get_object_or_404(Task, id=pk)
+        if request.user == task.owner:
+            form = TaskForm(request.POST or None, instance=task)
+            if request.method == "POST":
+                if form.is_valid():
+                    task = form.save(commit=False)
+                    task.user = request.user
+                    task.save()
+                    messages.warning(request, f'Descrição adicionada a tarefa "{task}"')
+                    return redirect('tasks-list')
+            else:
+                return render(request, 'tasks_timing/update_task.html', {
+                    'task': task,
+                    'form': form,
+                })
+        else:
+            return redirect('login')
+
+    else:
+        return redirect('login')
+
+
+def delete_task(request, pk):
+    if request.user.is_authenticated:
+        task = get_object_or_404(Task, id=pk)
+        if request.user == task.owner:
+            task.delete()
+            messages.warning(request, f'A tarefa "{task}" foi deletada!')
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            redirect('home')
     else:
         return redirect('login')
