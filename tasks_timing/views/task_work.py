@@ -5,13 +5,14 @@ from ..forms.time_working_form import TimeWorkingForm
 from ..models import Task, TimeWorking
 from ..forms import TaskForm
 
+from datetime import datetime
+
 def time_working_list(request):
     if request.user.is_authenticated:
         times_tasks = TimeWorking.objects.all()
         return render(request, "tasks_timing/time_working_list.html", {'times_tasks':times_tasks})
     else:
         return redirect('login')
-
 
 
 def add_desc_tm_working(request, pk):
@@ -44,5 +45,17 @@ def view_time_working(request, pk):
         return render(request, 'tasks_timing/view_time_working.html', {
             'time_working_task': time_working_task,
         })
+    else:
+        return redirect('login')
+
+def stop_time_work(request, pk):
+    if request.user.is_authenticated:
+        time_working = get_object_or_404(TimeWorking, id=pk)
+        time_working.hours_working_out = datetime.now()
+        time_working.time_out = True
+        time_working.save()
+
+        messages.warning(request, f'A terefa "{time_working}" foi encerrada, horas trabalhadas contabilizadas!')
+        return redirect('time-working-list')
     else:
         return redirect('login')

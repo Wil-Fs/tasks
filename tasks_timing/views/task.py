@@ -40,7 +40,7 @@ def start_task(request, pk):
         )
 
         messages.warning(request, f'A terefa "{task}" foi iniciada!')
-        return redirect('tasks-list')
+        return redirect('time-workings-list')
     else:
         return redirect('login')
 
