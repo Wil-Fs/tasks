@@ -1,0 +1,50 @@
+{% extends "tasks_timing/base.html" %}
+
+{% block title %} Tempo de trabalho {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <h2 class="col-10"> Registros - Tempo de trabalho </h2>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Data/Hora Início</th>
+                <th scope="col">Data/Hora Fim</th>
+                 <th scope="col">Horas Contabilizadas</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for time_task in times_tasks %}
+                <tr>
+                    <th scope="row">{{ time_task.id }}</th>
+                    <td>{{ time_task.task.owner }}</td>
+                    <td>{{ time_task.hours_working_in }}</td>
+                    <td>{{ time_task.hours_working_out }}</td>
+                    <td>{{ time_task.only_hours }}</td>
+                    <td>
+                        <a href="#">
+                            + descrição
+                        </a>
+
+                         <a href="#">
+                            + stop
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+
+
+{% endblock %}

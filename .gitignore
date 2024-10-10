@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-style.css
-bot.session
-
 # C extensions
 *.so
 
