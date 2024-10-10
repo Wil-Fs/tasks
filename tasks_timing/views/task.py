@@ -1,8 +1,6 @@
-from idlelib.rpc import request_queue
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from ..models import Task
+from ..models import Task, TimeWorking
 from ..forms import TaskForm
 
 
@@ -22,7 +20,7 @@ def add_task(request):
             if form.is_valid():
                 task = form.save(commit=False)
                 task.save()
-                messages.warning(request, 'Sua tarefa foi cadastrada!')
+                messages.warning(request, f'A tarefa {task} foi cadastrada!')
                 return redirect('tasks-list')
 
         return render(request, 'tasks_timing/add_task.html', {
@@ -30,5 +28,18 @@ def add_task(request):
         })
 
 
+    else:
+        return redirect('login')
+
+def start_task(request, pk):
+    if request.user.is_authenticated:
+        task = Task.objects.get(id=pk)
+        time_working = TimeWorking.objects.create(
+            task=task,
+            time_in=True
+        )
+
+        messages.warning(request, f'A terefa "{task}" foi iniciada!')
+        return redirect('tasks-list')
     else:
         return redirect('login')

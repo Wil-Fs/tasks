@@ -1,11 +1,10 @@
 from django.db import models
 from ..models import Task
 
-class Time_Working(models.Model):
-    date = models.DateTimeField(auto_now_add=True, editable=False)
+class TimeWorking(models.Model):
     job_description = models.CharField(max_length=800, blank=False, null=False)
-    hours_working_in = models.DateTimeField(null=True, blank=True)
-    hours_working_out = models.DateTimeField(null=True, blank=True)
+    hours_working_in = models.DateTimeField(null=True, blank=True, editable=False, auto_now_add=True)
+    hours_working_out = models.DateTimeField(null=True, blank=True, editable=False)
     hours_worked = models.DurationField(null=True, blank=True, editable=False)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     time_in = models.BooleanField(default=False)

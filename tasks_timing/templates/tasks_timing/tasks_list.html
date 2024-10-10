@@ -14,24 +14,30 @@
     </div>
 
     <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Descrição</th>
-          <th scope="col">Usuário</th>
-          <th scope="col">Data</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for task in tasks %}
+        <thead>
             <tr>
-              <th scope="row">{{ task.id }}</th>
-              <td>{{ task.description }}</td>
-              <td>{{ task.owner }}</td>
-              <td>@{{ task.date }}</td>
+                <th scope="col">#</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Data</th>
+                <th scope="col">Ações</th>
             </tr>
-        {% endfor %}
-      </tbody>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <th scope="row">{{ task.id }}</th>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.owner }}</td>
+                    <td>{{ task.date }}</td>
+                    <td>
+                        <a href="{% url 'start-task' task.id %}">
+                            Iniciar tarefa
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 
