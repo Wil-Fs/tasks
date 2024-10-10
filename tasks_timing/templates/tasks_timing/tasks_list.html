@@ -1,0 +1,41 @@
+{% extends "tasks_timing/base.html" %}
+
+{% block title %} Tarefas {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <h2 class="col-10"> Tarefas </h2>
+        <a class="col-2" href="{% url 'add-task' %}">
+            <button class="btn btn-success">+ Tarefas</button>
+        </a>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Usuário</th>
+          <th scope="col">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+            <tr>
+              <th scope="row">{{ task.id }}</th>
+              <td>{{ task.description }}</td>
+              <td>{{ task.owner }}</td>
+              <td>@{{ task.date }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+</div>
+
+
+{% endblock %}
