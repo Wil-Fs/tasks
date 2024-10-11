@@ -33,7 +33,7 @@ def time_working_list(request):
 def add_desc_tm_working(request, pk):
     if request.user.is_authenticated:
         time_working_task = get_object_or_404(TimeWorking, id=pk)
-        if request.user == time_working_task.task.owner:
+        if request.user == time_working_task.task.owner or request.user == time_working_task.task.manager:
             form = TimeWorkingForm(request.POST or None, instance=time_working_task)
             if request.method == "POST":
                 if form.is_valid():
@@ -48,7 +48,8 @@ def add_desc_tm_working(request, pk):
                     'form': form,
                 })
         else:
-            return redirect('login')
+            messages.warning(request, 'Somente o owner, ou usuário reponsável podem atualizar este registro!')
+            return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         return redirect('login')
@@ -56,10 +57,14 @@ def add_desc_tm_working(request, pk):
 def view_time_working(request, pk):
     if request.user.is_authenticated:
         time_working_task = get_object_or_404(TimeWorking, id=pk)
+        if request.user == time_working_task.task.owner or request.user == time_working_task.task.manager:
 
-        return render(request, 'tasks_timing/view_time_working.html', {
-            'time_working_task': time_working_task,
-        })
+            return render(request, 'tasks_timing/view_time_working.html', {
+                'time_working_task': time_working_task,
+            })
+        else:
+            messages.warning(request, 'Somente o owner, ou usuário reponsável podem atualizar este registro!')
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect('login')
 

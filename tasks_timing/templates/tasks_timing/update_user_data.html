@@ -7,10 +7,10 @@
 			{% csrf_token %}
 			{{ user_form.as_p }} <br>
 			<br>
-			<button type="submit" class="btn btn-outline-primary">Update</button>
+			<button type="submit" class="btn btn-outline-primary">Atualizar</button>
 			<button type="button" class="btn btn-outline-warning">
 				<a style="text-decoration: none" href="{% url 'tasks-list'%}">
-					Cancel
+					Cancelar
 				</a>
 			</button>
 		</form>

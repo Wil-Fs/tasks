@@ -1,13 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from ..models import Task, TimeWorking
-from ..forms import TaskForm
+from ..forms import TaskForm, TaskFilterForm
 
 
 def tasks(request):
     if request.user.is_authenticated:
-        tasks = Task.objects.all().order_by('-date')
-        return render(request, 'tasks_timing/tasks_list.html', {'tasks': tasks})
+        form = TaskFilterForm(request.GET or None)
+        tasks = Task.objects.all()
+
+        if form.is_valid():
+            if form.cleaned_data['manager']:
+                tasks = tasks.filter(manager=form.cleaned_data['manager'])
+            if form.cleaned_data['date']:
+                tasks = tasks.filter(date__lte=form.cleaned_data['date'])
+            if form.cleaned_data['description']:
+                tasks = tasks.filter(description__icontains=form.cleaned_data['description'])
+
+        return render(request, "tasks_timing/tasks_list.html", {'tasks': tasks, 'form': form})
     else:
         return redirect('login')
 
@@ -48,7 +58,7 @@ def start_task(request, pk):
 def update_task(request, pk):
     if request.user.is_authenticated:
         task = get_object_or_404(Task, id=pk)
-        if request.user == task.owner:
+        if request.user == task.owner or request.user == task.manager:
             form = TaskForm(request.POST or None, instance=task)
             if request.method == "POST":
                 if form.is_valid():
@@ -63,7 +73,8 @@ def update_task(request, pk):
                     'form': form,
                 })
         else:
-            return redirect('login')
+            messages.warning(request, 'Somente o owner, ou usuário reponsável podem atualizar esta tarefa!')
+            return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         return redirect('login')
@@ -77,6 +88,7 @@ def delete_task(request, pk):
             messages.warning(request, f'A tarefa "{task}" foi deletada!')
             return redirect(request.META.get('HTTP_REFERER'))
         else:
-            redirect('home')
+            messages.warning(request, 'Somente o owner, pode deletar esta tarefa!')
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
-        return redirect('login')
+        redirect('login')

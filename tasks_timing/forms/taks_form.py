@@ -18,7 +18,7 @@ class TaskForm(forms.ModelForm):
         exclude = ('date',)
 
         labels = {
-            'owner': 'Usuário Reposável:'
+            'manager': 'Usuário Reposável:'
         }
 
         widgets = {

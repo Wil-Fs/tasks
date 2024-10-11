@@ -14,10 +14,10 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.warning(request, f'You Have Been Logged In!, Welcome @{request.user.username.lower()}')
+                messages.warning(request, f'Bem-vindo {request.user.username.lower()}')
                 return redirect('home')
             else:
-                messages.warning(request, f'There was an error loggin in. Try Again...')
+                messages.warning(request, f'Houve um erro ao tentar logar, suas credenciais podem estar erradas!')
                 return redirect('login')
         else:
             return render(request, 'tasks_timing/login.html', {})
@@ -26,7 +26,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.warning(request, 'You Have Been Logged Out. See you soon!')
+    messages.warning(request, 'Usuário deslogado. Até mais!')
     return redirect('login')
 
 
@@ -46,7 +46,7 @@ def register_user(request):
             #Log in User
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.warning(request, f'You have successfuly registered! Welcome @{user.username.lower()}')
+            messages.warning(request, f'Usuário registrado! Bem-vindo {user.username.lower()}')
             return redirect('home')
     return render(request, 'tasks_timing/register.html', {'form': form})
 
@@ -60,12 +60,12 @@ def update_user_data(request):
         if user_form.is_valid():
             user_form.save()
             login(request, current_user)
-            messages.warning(request, f'@{request.user.username.lower()}, your profile has been updated!')
+            messages.warning(request, f'@{request.user.username.lower()}, seus dados foram atualizados!')
             return redirect('home')
 
         return render(request, 'tasks_timing/update_user_data.html', {
             'user_form': user_form,
         })
     else:
-        messages.warning(request, 'You must be logged in to view that page!')
+        messages.warning(request, 'Você deve estar logado para ver essa página!')
         return redirect('home')

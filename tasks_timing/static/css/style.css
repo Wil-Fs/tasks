@@ -30,12 +30,20 @@ textarea {
     margin-top: 20px;
 }
 
+.navbar_span_text {
+    color: #fff;
+    margin-right: 14px;
+}
 /* form_filter */
 
 .button_filter {
     margin: 20px 10px;
     max-width: 300px;
     width: 100%;
+}
+
+.inputs_form {
+    background-color: #fff;
 }
 
 /* add_tasks.html */

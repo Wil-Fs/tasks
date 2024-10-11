@@ -10,11 +10,11 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-success" type="submit">
+        <button class="btn btn-outline-primary" type="submit">
             Salvar
         </button>
         <a href="{% url 'time-working-list' %}">
-            <button class="btn btn-secondary" type="button">
+            <button class="btn btn-outline-warning" type="button">
                 Cancelar
             </button>
         </a>
