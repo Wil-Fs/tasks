@@ -36,7 +36,7 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
         ADMIN_EMAIL=         #Email para o Admin
         
         #App settings
-        ALLOWED_HOSTS=       #Hosts permitidos no sistema
+        ALLOWED_HOSTS=       #Hosts permitidos Ex: * --permite todos
         DEBUG=               #Ativar ou não o DEBUG
             
         #Database  
