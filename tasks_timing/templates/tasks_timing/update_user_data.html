@@ -1,7 +1,7 @@
 {% extends 'tasks_timing/base.html' %}
 {% block content %}
 	<div class="col-md-6 offset-md-3">
-		<h1> Atualizar dados do usuário "{{ user.username }}" ?  </h1>
+		<h3> Atualizar dados do usuário "{{ user.username }}" ?  </h3>
 		<form method="POST" enctype="multipart/form-data">
 			<br>
 			{% csrf_token %}

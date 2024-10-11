@@ -1,10 +1,11 @@
 {% extends "tasks_timing/base.html" %}
 
-{% block title %} Homepage {% endblock %}
+{% block title %} Atualizar tarefa {% endblock %}
 
 {% block content %}
 
 <div class="container">
+    <h3>Atualizar Tarefa</h3>
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
