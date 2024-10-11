@@ -1,0 +1,24 @@
+{% extends "tasks_timing/base.html" %}
+
+{% block title %} Detelhes {{ time_working_task.task }} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+  <h4>
+      {{ time_working_task.task }}
+  </h4>
+
+  <div class="card" style="width: 40rem;">
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Usuário: {{ time_working_task.task.owner }}</li>
+      <li class="list-group-item">Data/Hora Início: {{ time_working_task.hours_working_in }}</li>
+      <li class="list-group-item">Deetalhes do trabalho realizado: <p>{{ time_working_task.job_description }}</p></li>
+    </ul>
+  </div>
+</div>
+
+
+{% endblock %}

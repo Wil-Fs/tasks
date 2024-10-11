@@ -2,7 +2,7 @@ from django.db import models
 from ..models import Task
 
 class TimeWorking(models.Model):
-    job_description = models.CharField(max_length=800, blank=False, null=False)
+    job_description = models.CharField(max_length=800, blank=False, null=False, default='Sem detalhes registrados!')
     hours_working_in = models.DateTimeField(null=True, blank=True, editable=False, auto_now_add=True)
     hours_working_out = models.DateTimeField(null=True, blank=True, editable=False)
     hours_worked = models.DurationField(null=True, blank=True, editable=False)

@@ -7,13 +7,33 @@
 <div class="container">
 
     <div class="row">
-        <h2 class="col-10"> Registros - Tempo de trabalho </h2>
+        <h2 class="col-10 title_page"> Registros - Tempo de trabalho </h2>
     </div>
-
+    <form class="row d-flex form-control" method="get">
+        {% csrf_token %}
+        <div class=" col-3">
+            <label>Tarefa</label>
+            {{ form.task }}
+        </div>
+        <div class=" col-3">
+            <label>Usuário Reposável:</label>
+            {{ form.manager }}
+        </div>
+        <div class=" col-3">
+            <label>Data de Início</label>
+            {{ form.hours_working_in }}
+        </div>
+        <div class=" col-3">
+            <label>Data de Fim</label>
+            {{ form.hours_working_out }}
+        </div>
+        <button type="submit" class="btn btn-outline-primary button_filter">Filtrar</button>
+    </form>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Tarefa</th>
                 <th scope="col">Usuário</th>
                 <th scope="col">Data/Hora Início</th>
                 <th scope="col">Data/Hora Fim</th>
@@ -24,19 +44,37 @@
         <tbody>
             {% for time_task in times_tasks %}
                 <tr>
-                    <th scope="row">{{ time_task.id }}</th>
+                    <td scope="row">{{ time_task.id }}</td>
+                    <td>{{ time_task.task }}</td>
                     <td>{{ time_task.task.owner }}</td>
                     <td>{{ time_task.hours_working_in }}</td>
-                    <td>{{ time_task.hours_working_out }}</td>
-                    <td>{{ time_task.only_hours }}</td>
+                    {% if time_task.hours_working_out%}
+                        <td>{{ time_task.hours_working_out }}</td>
+                    {% else %}
+                        <td> --- </td>
+                    {% endif %}
+                    {% if time_task.only_hours%}
+                        <td>{{ time_task.only_hours }}</td>
+                    {% else %}
+                        <td> --- </td>
+                    {% endif %}
                     <td>
-                        <a href="#">
-                            + descrição
+                        <a class='icons' href="{% url 'view-time-working' time_task.id%}">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a class='icons' href="{% url 'add-desc-tm-working' time_task.id%}">
+                            <i class="bi bi-journal-text"></i>
                         </a>
 
-                         <a href="#">
-                            + stop
-                        </a>
+                        {% if not time_task.time_out %}
+                            <a class='icons' href="{% url 'stop-time-work' time_task.id%}">
+                                <i class="bi bi-stopwatch"></i>
+                            </a>
+                        {% else %}
+                            <a class='icons' href="">
+                                <i class="bi bi-clock-history"></i>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

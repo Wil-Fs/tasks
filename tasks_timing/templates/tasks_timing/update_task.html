@@ -1,18 +1,19 @@
 {% extends "tasks_timing/base.html" %}
 
-{% block title %} Adicionar Tarefa {% endblock %}
+{% block title %} Atualizar tarefa {% endblock %}
 
 {% block content %}
 
 <div class="container">
+    <h3>Atualizar Tarefa</h3>
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-outline-primary" type="submit">
+        <button class="btn btn-success" type="submit">
             Salvar
         </button>
         <a href="{% url 'tasks-list' %}">
-            <button class="btn btn-outline-warning" type="button">
+            <button class="btn btn-secondary" type="button">
                 Cancelar
             </button>
         </a>
