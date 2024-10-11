@@ -9,7 +9,26 @@
     <div class="row">
         <h2 class="col-10"> Registros - Tempo de trabalho </h2>
     </div>
-
+    <form class="row d-flex form-control" method="get">
+        {% csrf_token %}
+        <div class=" col-3">
+            <label>Tarefa</label>
+            {{ form.task }}
+        </div>
+        <div class=" col-3">
+            <label>Usuário Reposável:</label>
+            {{ form.manager }}
+        </div>
+        <div class=" col-3">
+            <label>Data de Início</label>
+            {{ form.hours_working_in }}
+        </div>
+        <div class=" col-3">
+            <label>Data de Fim</label>
+            {{ form.hours_working_out }}
+        </div>
+        <button type="submit" class="btn btn-outline-success">Filtrar</button>
+    </form>
     <table class="table">
         <thead>
             <tr>

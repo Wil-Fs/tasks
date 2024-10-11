@@ -1,16 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from ..forms.time_working_form import TimeWorkingForm
+from ..forms import TimeWorkingForm, TimeWorkingFilterForm
 from ..models import Task, TimeWorking
-from ..forms import TaskForm
 
 from datetime import datetime
 
 def time_working_list(request):
     if request.user.is_authenticated:
+        form = TimeWorkingFilterForm(request.GET or None)
         times_tasks = TimeWorking.objects.all()
-        return render(request, "tasks_timing/time_working_list.html", {'times_tasks':times_tasks})
+
+        if form.is_valid():
+            if form.cleaned_data['task']:
+                times_tasks = times_tasks.filter(task=form.cleaned_data['task'])
+            if form.cleaned_data['manager']:
+                times_tasks = times_tasks.filter(task__manager=form.cleaned_data['manager'])
+            if form.cleaned_data['hours_working_in']:
+                times_tasks = times_tasks.filter(hours_working_in__gte=form.cleaned_data['hours_working_in'])
+            if form.cleaned_data['hours_working_out']:
+                times_tasks = times_tasks.filter(hours_working_out__lte=form.cleaned_data['hours_working_out'])
+
+
+        return render(request, "tasks_timing/time_working_list.html", {
+            'times_tasks': times_tasks,
+            'form': form
+        })
     else:
         return redirect('login')
 

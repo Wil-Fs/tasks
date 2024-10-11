@@ -19,8 +19,9 @@ def add_task(request):
         if request.method == "POST":
             if form.is_valid():
                 task = form.save(commit=False)
+                task.owner = request.user
                 task.save()
-                messages.warning(request, f'A tarefa {task} foi cadastrada!')
+                messages.warning(request, f'A tarefa "{task}" foi cadastrada!')
                 return redirect('tasks-list')
 
         return render(request, 'tasks_timing/add_task.html', {
@@ -40,7 +41,7 @@ def start_task(request, pk):
         )
 
         messages.warning(request, f'A terefa "{task}" foi iniciada!')
-        return redirect('time-workings-list')
+        return redirect('time-working-list')
     else:
         return redirect('login')
 

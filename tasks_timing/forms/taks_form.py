@@ -12,7 +12,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('owner', 'description',)
+        fields = ('manager', 'description',)
         exclude = ('date',)
 
         labels = {
@@ -20,7 +20,7 @@ class TaskForm(forms.ModelForm):
         }
 
         widgets = {
-            'owner': forms.Select(
+            'manager': forms.Select(
             attrs={
                 "class": "form-select",
             }),
