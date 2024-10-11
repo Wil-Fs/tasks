@@ -1,0 +1,20 @@
+{% extends 'tasks_timing/base.html' %}
+{% block content %}
+	<div class="col-md-6 offset-md-3">
+		<h3> Atualizar dados do usuário "{{ user.username }}" ?  </h3>
+		<form method="POST" enctype="multipart/form-data">
+			<br>
+			{% csrf_token %}
+			{{ user_form.as_p }} <br>
+			<br>
+			<button type="submit" class="btn btn-outline-primary">Atualizar</button>
+			<button type="button" class="btn btn-outline-warning">
+				<a style="text-decoration: none" href="{% url 'tasks-list'%}">
+					Cancelar
+				</a>
+			</button>
+		</form>
+		<br>
+	</div>
+{% endblock %}
+

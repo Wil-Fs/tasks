@@ -12,5 +12,5 @@ class TimeWorkingForm(forms.ModelForm):
 
     class Meta:
         model = TimeWorking
-        exclude = ("date", "hours_working_in", "hours_working_out", "hours_worked", "time_in", "time_out")
+        exclude = ("date", "hours_working_in", "hours_working_out", "hours_worked", "time_in", "time_out", "task",)
 

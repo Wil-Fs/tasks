@@ -7,11 +7,28 @@
 <div class="container">
 
     <div class="row">
-        <h2 class="col-10"> Tarefas </h2>
+        <h2 class="col-10 title_page"> Tarefas </h2>
         <a class="col-2" href="{% url 'add-task' %}">
-            <button class="btn btn-success">+ Tarefas</button>
+            <button class="btn btn-outline-primary">+ Tarefas</button>
         </a>
     </div>
+
+    <form method="get" class="d-flex form-control row">
+        {% csrf_token %}
+        <div class="col-3">
+            <label>Usuário Responsável</label>
+            {{ form.manager }}
+        </div>
+        <div class="col-3">
+            <label>Data</label>
+            {{ form.date }}
+        </div>
+        <div class="col-3">
+            <label>Descrição</label>
+            {{ form.description }}
+        </div>
+        <button type="submit" class="btn btn-outline-primary button_filter">Filtrar</button>
+    </form>
 
     <table class="table">
         <thead>
@@ -31,8 +48,14 @@
                     <td>{{ task.owner }}</td>
                     <td>{{ task.date }}</td>
                     <td>
-                        <a href="{% url 'start-task' task.id %}">
-                            Iniciar tarefa
+                        <a class='icons' href="{% url 'start-task' task.id %}">
+                            <i class="bi bi-clipboard-plus"></i>
+                        </a>
+                        <a class='icons' href="{% url 'update-task' task.id %}">
+                            <i class="bi bi-pen"></i>
+                        </a>
+                        <a class='icons' href="{% url 'delete-task' task.id %}">
+                            <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
