@@ -9,7 +9,7 @@ from datetime import datetime
 def time_working_list(request):
     if request.user.is_authenticated:
         form = TimeWorkingFilterForm(request.GET or None)
-        times_tasks = TimeWorking.objects.all()
+        times_tasks = TimeWorking.objects.all().order_by('-hours_working_in')
 
         if form.is_valid():
             if form.cleaned_data['task']:

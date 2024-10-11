@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="row">
-        <h2 class="col-10"> Registros - Tempo de trabalho </h2>
+        <h2 class="col-10 title_page"> Registros - Tempo de trabalho </h2>
     </div>
     <form class="row d-flex form-control" method="get">
         {% csrf_token %}
@@ -27,7 +27,7 @@
             <label>Data de Fim</label>
             {{ form.hours_working_out }}
         </div>
-        <button type="submit" class="btn btn-outline-success">Filtrar</button>
+        <button type="submit" class="btn btn-outline-success button_filter">Filtrar</button>
     </form>
     <table class="table">
         <thead>
@@ -59,16 +59,22 @@
                         <td> --- </td>
                     {% endif %}
                     <td>
-                        <a href="{% url 'view-time-working' time_task.id%}">
-                            + view
+                        <a class='icons' href="{% url 'view-time-working' time_task.id%}">
+                            <i class="bi bi-eye"></i>
                         </a>
-                        <a href="{% url 'add-desc-tm-working' time_task.id%}">
-                            + descrição
+                        <a class='icons' href="{% url 'add-desc-tm-working' time_task.id%}">
+                            <i class="bi bi-journal-text"></i>
                         </a>
 
-                         <a href="{% url 'stop-time-work' time_task.id%}">
-                            + stop
-                        </a>
+                        {% if not time_task.time_out %}
+                            <a class='icons' href="{% url 'stop-time-work' time_task.id%}">
+                                <i class="bi bi-stopwatch"></i>
+                            </a>
+                        {% else %}
+                            <a class='icons' href="">
+                                <i class="bi bi-clock-history"></i>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

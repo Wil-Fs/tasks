@@ -5,7 +5,9 @@ class TaskForm(forms.ModelForm):
     description = forms.CharField(required=True, widget=forms.TextInput(
         attrs={
             "class": "form-control",
-            "placeholder": "Descrição"
+            "placeholder": "Descrição",
+            "rows":"40",
+            "cols":"100",
         }),
         label = "",
     )

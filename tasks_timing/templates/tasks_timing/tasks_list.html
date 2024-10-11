@@ -7,9 +7,9 @@
 <div class="container">
 
     <div class="row">
-        <h2 class="col-10"> Tarefas </h2>
+        <h2 class="col-10 title_page"> Tarefas </h2>
         <a class="col-2" href="{% url 'add-task' %}">
-            <button class="btn btn-success">+ Tarefas</button>
+            <button class="btn btn-outline-success">+ Tarefas</button>
         </a>
     </div>
 
@@ -31,14 +31,14 @@
                     <td>{{ task.owner }}</td>
                     <td>{{ task.date }}</td>
                     <td>
-                        <a href="{% url 'start-task' task.id %}">
-                            Iniciar tarefa
+                        <a class='icons' href="{% url 'start-task' task.id %}">
+                            <i class="bi bi-clipboard-plus"></i>
                         </a>
-                        <a href="{% url 'update-task' task.id %}">
-                            update-task
+                        <a class='icons' href="{% url 'update-task' task.id %}">
+                            <i class="bi bi-pen"></i>
                         </a>
-                        <a href="{% url 'delete-task' task.id %}">
-                            delete-task
+                        <a class='icons' href="{% url 'delete-task' task.id %}">
+                            <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>

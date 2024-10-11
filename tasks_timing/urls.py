@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (home, tasks, add_task, start_task, time_working_list, add_desc_tm_working, update_task, delete_task,
-                    view_time_working, stop_time_work)
+                    view_time_working, stop_time_work, logout_user, login_user, register_user, update_user_data)
 
 urlpatterns = [
     path('', home, name='home'),
@@ -13,4 +13,8 @@ urlpatterns = [
     path('add_desc_tm_working?<pk>', add_desc_tm_working, name='add-desc-tm-working'),
     path('view_time_working?<pk>', view_time_working, name="view-time-working"),
     path('stop_time_work?<pk>', stop_time_work, name='stop-time-work'),
+    path('login_user', login_user, name='login'),
+    path('logout_user', logout_user, name='logout'),
+    path('register_user', register_user, name='register-user'),
+    path('update_user_data', update_user_data, name='update-user-data')
 ]

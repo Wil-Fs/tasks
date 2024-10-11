@@ -6,7 +6,7 @@ from ..forms import TaskForm
 
 def tasks(request):
     if request.user.is_authenticated:
-        tasks = Task.objects.all()
+        tasks = Task.objects.all().order_by('-date')
         return render(request, 'tasks_timing/tasks_list.html', {'tasks': tasks})
     else:
         return redirect('login')

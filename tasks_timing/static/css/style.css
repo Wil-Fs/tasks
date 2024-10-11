@@ -6,13 +6,42 @@
     margin: 0;
     text_decoration: none;
     list_style: none;
+
+}
+
+textarea {
+    resize: none;
+}
+
+.icons {
+    text-decoration: none;
+    font-size: 1.3em;
+    margin-right: 6px;
 }
 
 /* navbar.html */
 
 #navbar {
-    margin-bottom: 74px;
+    margin-bottom: 118px;
 }
 
+.navbar_user_title {
+    color: #fff;
+    margin-top: 20px;
+}
 
-/* home.html */
+/* form_filter */
+
+.button_filter {
+    margin: 20px 10px;
+    max-width: 300px;
+    width: 100%;
+}
+
+/* add_tasks.html */
+
+.title_page {
+    align-items: center;
+    display: flex;
+    margin: 10px 0px 26px;
+}
