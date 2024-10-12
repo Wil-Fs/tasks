@@ -6,9 +6,7 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
 
 ```
     Python 3.12.3
-    Docker && Docker Compose (jeito mais rápido para rodar o app)
-    
-    Postgresql 13 (caso não tenha docker)
+    Docker && Docker Compose
 ```
 
 ## QuickStart - Docker
@@ -19,12 +17,10 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
         git clone https://github.com/Wil-Fs/tasks.git
    ```
 
-2. Instalar dependências 
+2. Configurar dependências 
 
    ```shell
         cd tasks
-        python -m venv env
-        .\env\Scripts\activate
    ```
    2.1 Criar um .env file na raiz do projeto com as seguintes variaveis
    ```
@@ -46,6 +42,25 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
         DATABASE_PASSWORD=   #Senha para o banco
         DATABASE_PORT=       #Porta Ex: 5432
         TIME_ZONE=           #Define o horário local e formato das datas
+   
+   #Exemplo .env preenchido
+      
+         #Super user
+         ADMIN_USER=admin
+         ADMIN_PASSWORD=admin
+         ADMIN_EMAIL=admin@email.com
+         
+         #App settings
+         ALLOWED_HOSTS=*
+         DEBUG=False
+         
+         #Database
+         DATABASE_NAME=tasks_db
+         DATABASE_HOST=postgres
+         DATABASE_USER=postgres
+         DATABASE_PASSWORD=8744821jk99ww@13
+         DATABASE_PORT=5432
+         TIME_ZONE=America/Sao_Paulo
    ```
    2.2 Observações sobre o compose.yaml
     ```
