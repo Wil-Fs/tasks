@@ -16,8 +16,6 @@ COPY requirements.txt .
 
 RUN apt-get update && apt-get -y install libpq-dev gcc
 
-RUN python -m venv env && .\env\Scripts\activate
-
 RUN python -m pip install -r requirements.txt
 
 COPY . .
