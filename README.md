@@ -7,8 +7,6 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
 ```
     Python 3.12.3
     Docker && Docker Compose (jeito mais rápido para rodar o app)
-    
-    Postgresql 13 (caso não tenha docker)
 ```
 
 ## QuickStart - Docker
@@ -19,12 +17,10 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
         git clone https://github.com/Wil-Fs/tasks.git
    ```
 
-2. Instalar dependências 
+2. Configurar dependências 
 
    ```shell
         cd tasks
-        python -m venv env
-        .\env\Scripts\activate
    ```
    2.1 Criar um .env file na raiz do projeto com as seguintes variaveis
    ```
