@@ -6,7 +6,7 @@ Web app, registra tarefas, e o tempo gasto em cada uma.
 
 ```
     Python 3.12.3
-    Docker && Docker Compose (jeito mais rápido para rodar o app)
+    Docker && Docker Compose
 ```
 
 ## QuickStart - Docker
