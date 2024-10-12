@@ -26,4 +26,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD python manage.py migrate && python manage.py admin_create && gunicorn 'tasks.wsgi' --bind=0.0.0.0:8000
+CMD python manage.py collectstatic && python manage.py migrate && python manage.py admin_create && gunicorn 'tasks.wsgi' --bind=0.0.0.0:8000
