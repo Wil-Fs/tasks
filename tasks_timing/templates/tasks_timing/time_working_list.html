@@ -9,7 +9,7 @@
     <div class="row">
         <h2 class="col-10 title_page"> Registros - Tempo de trabalho </h2>
     </div>
-    <form class="row d-flex form-control" method="get">
+    <form class="row d-flex form-control form_box" method="get">
         {% csrf_token %}
         <div class=" col-3">
             <label>Tarefa</label>
@@ -46,7 +46,11 @@
                 <tr>
                     <td scope="row">{{ time_task.id }}</td>
                     <td>{{ time_task.task }}</td>
-                    <td>{{ time_task.task.owner }}</td>
+                    {% if time_task.manager.first_name %}
+                        <td>{{ time_task.task.manager.first_name }} {{ time_task.task.manager.last_name }}</td>
+                    {% else %}
+                        <td>{{ time_task.task.manager }}</td>
+                    {% endif %}
                     <td>{{ time_task.hours_working_in }}</td>
                     {% if time_task.hours_working_out%}
                         <td>{{ time_task.hours_working_out }}</td>
@@ -71,9 +75,9 @@
                                 <i class="bi bi-stopwatch"></i>
                             </a>
                         {% else %}
-                            <a class='icons' href="">
+                            <span class='icons'>
                                 <i class="bi bi-clock-history"></i>
-                            </a>
+                            </span>
                         {% endif %}
                     </td>
                 </tr>
