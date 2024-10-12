@@ -13,7 +13,7 @@
         </a>
     </div>
 
-    <form method="get" class="d-flex form-control row">
+    <form method="get" class="d-flex form-control row form_box">
         {% csrf_token %}
         <div class="col-3">
             <label>Usuário Responsável</label>
@@ -30,7 +30,7 @@
         <button type="submit" class="btn btn-outline-primary button_filter">Filtrar</button>
     </form>
 
-    <table class="table">
+    <table class="table container">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -45,7 +45,11 @@
                 <tr>
                     <th scope="row">{{ task.id }}</th>
                     <td>{{ task.description }}</td>
-                    <td>{{ task.owner }}</td>
+                    {% if task.manager.first_name %}
+                        <td>{{ task.manager.first_name }} {{ task.manager.last_name }}</td>
+                    {% else %}
+                        <td>{{ task.manager }}</td>
+                    {% endif %}
                     <td>{{ task.date }}</td>
                     <td>
                         <a class='icons' href="{% url 'start-task' task.id %}">
