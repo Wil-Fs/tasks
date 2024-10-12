@@ -19,6 +19,17 @@ textarea {
     margin-right: 6px;
 }
 
+body, html {
+    min-height: 100vh;
+    height: auto;
+}
+
+body {
+    background: linear-gradient(to bottom, #a2a2a2,#a1a1a1);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 /* navbar.html */
 
 #navbar {
@@ -35,6 +46,10 @@ textarea {
     margin-right: 14px;
 }
 /* form_filter */
+
+.form_box {
+    margin: 0 0 20px;
+}
 
 .button_filter {
     margin: 20px 10px;
